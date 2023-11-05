@@ -1,0 +1,4 @@
+build/
+test-app/build
+test-app/public
+test-app/libscala-engine.a

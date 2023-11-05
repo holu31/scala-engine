@@ -7,7 +7,7 @@
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
 
-#include <engine/Node.h>
+#include <engine/Node.hpp>
 
 #include <iostream>
 
@@ -23,7 +23,8 @@ public:
     Camera();
     ~Camera();
 
-    glm::mat4 projMatGet();
-    glm::mat4 viewMatGet();
+    void makeCurrent();
+
+    glm::mat4 projMat() const;
 
 };

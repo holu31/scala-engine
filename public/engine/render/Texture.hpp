@@ -18,6 +18,12 @@ class Texture {
 
 public:
 
+    uint32_t minFilter = GL_LINEAR;
+    uint32_t magFilter = GL_LINEAR;
+
+    uint32_t wrapS = GL_CLAMP;
+    uint32_t wrapT = GL_CLAMP;
+
     Texture(std::string texturePath);
         
 

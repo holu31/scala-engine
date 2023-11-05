@@ -6,7 +6,7 @@
 
 #include <glm/glm.hpp>
 
-#include <engine/render/Mesh.h>
+#include <engine/render/Mesh.hpp>
 
 #include <vector>
 

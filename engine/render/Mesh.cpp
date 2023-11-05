@@ -1,5 +1,5 @@
-#include <engine/render/Mesh.h>
-#include <engine/Camera.h>
+#include <engine/render/Mesh.hpp>
+#include <engine/Camera.hpp>
 
 void Mesh::updateBuffers() {
 	glBindVertexArray(VAO);
@@ -65,6 +65,8 @@ void Mesh::setTexture(Texture *texture)
 void Mesh::start() {}
 
 void Mesh::draw() {
+	Node::draw();
+	
 	m_shader->Bind();
 	glBindVertexArray(VAO);
 	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_indexBuffer);
@@ -72,22 +74,12 @@ void Mesh::draw() {
 	if(m_texture != nullptr) m_texture->bind();
 
 	if(Camera::current != nullptr){
-		m_shader->setUniform("projMat", Camera::current->projMatGet());
-		m_shader->setUniform("viewMat", Camera::current->viewMatGet());
+		m_shader->setUniform("projMat", Camera::current->projMat());
+		m_shader->setUniform("viewMat", Camera::current->viewMat());
 	}
 	glUniform3f(m_shader->getULoc("color"), color.x, color.y, color.z);
 
-	transMat = glm::mat4(1.0f);
-
-	transMat = glm::translate(transMat, pos);
-	
-	transMat = glm::rotate(transMat, glm::radians(rot.x), glm::vec3(1.0f, 0.0f, 0.0f));
-	transMat = glm::rotate(transMat, glm::radians(rot.y), glm::vec3(0.0f, 1.0f, 0.0f));
-	transMat = glm::rotate(transMat, glm::radians(rot.z), glm::vec3(0.0f, 0.0f, 1.0f));
-
-	transMat = glm::scale(transMat, scale);
-
-	m_shader->setUniform("transMat", transMat);
+	m_shader->setUniform("transMat", this->transMat());
 
 	glDrawElements(GL_TRIANGLES, m_indices.size(), GL_UNSIGNED_INT, nullptr);
 

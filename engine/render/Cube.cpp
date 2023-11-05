@@ -1,4 +1,4 @@
-#include <engine/render/Cube.h>
+#include <engine/render/Cube.hpp>
 
 Cube::Cube() : Mesh()
 {

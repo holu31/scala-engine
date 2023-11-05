@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include <vector>
-#include <engine/Scene.h>
+#include <engine/Scene.hpp>
 
 class Window {
 

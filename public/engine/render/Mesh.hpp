@@ -6,10 +6,10 @@
 
 #include <glm/glm.hpp>
 
-#include <utils/Vector.h>
-#include <engine/render/Shaders.h>
-#include <engine/render/Texture.h>
-#include <engine/Node.h>
+#include <utils/Vector.hpp>
+#include <engine/render/Shaders.hpp>
+#include <engine/render/Texture.hpp>
+#include <engine/Node.hpp>
 
 #include <iostream>
 #include <vector>
@@ -18,8 +18,6 @@ class Mesh : public Node {
 
     void setArrayBuffer(int pos, int size, unsigned int id, std::vector<float> data);
     void setElementArrayBuffer(unsigned int id, std::vector<int> data);
-
-    glm::mat4 transMat = glm::mat4(1.0f);
 
 protected:
 

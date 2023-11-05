@@ -1,4 +1,4 @@
-#include <engine/Window.h>
+#include <engine/Window.hpp>
 #include <iostream>
 #include <stdio.h>
 
