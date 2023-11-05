@@ -47,7 +47,6 @@ public:
         std::vector<float> uv);
     Mesh() {}
 
-    void start() override;
     void draw() override;
 
     void setTexture(Texture *texture);

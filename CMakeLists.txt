@@ -9,11 +9,15 @@ add_compile_options(
 
 
 include_directories("public/")
+include_directories("public/thirdparty/")
+
 # Add source files
 set(SOURCE_LIB
     engine/Window.cpp
     engine/Camera.cpp
     engine/Node.cpp
+    engine/physics/Physics.cpp
+    engine/physics/PhysicsObject.cpp
     engine/render/Shaders.cpp
     engine/render/Mesh.cpp
     engine/render/Cube.cpp
@@ -25,4 +29,4 @@ set(SOURCE_LIB
 add_library(scala-engine STATIC ${SOURCE_LIB})
 
 # Link libraries
-target_link_libraries(scala-engine glfw dl pthread)
+target_link_libraries(scala-engine glfw dl pthread BulletCollision LinearMath BulletDynamics)

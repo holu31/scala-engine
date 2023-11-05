@@ -8,8 +8,9 @@ add_compile_options(
 )
 
 include_directories("public/")
+include_directories("public/thirdparty/")
 
 add_executable(test-app app.cpp)
 
 # Link libraries
-target_link_libraries(test-app ${CMAKE_SOURCE_DIR}/libscala-engine.a glfw)
+target_link_libraries(test-app ${CMAKE_SOURCE_DIR}/libscala-engine.a glfw BulletCollision LinearMath BulletDynamics)

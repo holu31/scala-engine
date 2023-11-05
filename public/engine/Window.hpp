@@ -6,10 +6,12 @@
 
 #include <vector>
 #include <engine/Scene.hpp>
+#include <engine/physics/Physics.hpp>
 
 class Window {
 
     GLFWwindow *m_window;
+    Physics *m_physics;
 
 public:
 

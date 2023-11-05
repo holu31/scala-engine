@@ -46,6 +46,8 @@ Window::Window(
 
     glfwSwapInterval(0); // VSync
 
+    m_physics = new Physics();
+
     std::cout << "Vendor: " << glGetString(GL_VENDOR) << std::endl;
     std::cout << "Renderer: " << glGetString(GL_RENDERER) << std::endl;
     std::cout << "Version: " << glGetString(GL_VERSION) << std::endl;
@@ -69,6 +71,8 @@ void Window::runScene(Scene *scene)
 
         float deltaTime = (float) glfwGetTime() - prevDeltaTime;
         prevDeltaTime = (float) glfwGetTime();
+
+        Physics::dynamicsWorld->stepSimulation(deltaTime, m_physics->steps);
 
         scene->draw();
 

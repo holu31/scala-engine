@@ -72,10 +72,6 @@ glm::mat4 Node::viewMat() const {
     return out;
 }
 
-void Node::start() {
-
-}
-
 void Node::draw() {
     for (auto child : m_children)
         child->draw();

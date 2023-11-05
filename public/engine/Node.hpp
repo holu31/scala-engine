@@ -9,16 +9,13 @@ class Node {
     Node *m_parent = nullptr;
     std::vector<Node*> m_children {};
 
-    glm::vec3 globalPos() const;
-    glm::vec3 globalRot() const;
-
 public:
 
     bool visible = false;
 
-    glm::vec3 pos { 0.0f };
-    glm::vec3 rot { 0.0f };
-    glm::vec3 scale { 1.0f };
+    glm::vec3 pos = glm::vec3(0.0f);
+    glm::vec3 rot = glm::vec3(0.0f);
+    glm::vec3 scale = glm::vec3(1.0f);
 
     Node();
     virtual ~Node();
@@ -36,6 +33,8 @@ public:
     glm::mat4 transMat() const;
     glm::mat4 viewMat() const;
 
-    virtual void start();
+    glm::vec3 globalPos() const;
+    glm::vec3 globalRot() const;
+
     virtual void draw();
 };

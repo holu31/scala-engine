@@ -62,8 +62,6 @@ void Mesh::setTexture(Texture *texture)
 	m_shader->Unbind();
 }
 
-void Mesh::start() {}
-
 void Mesh::draw() {
 	Node::draw();
 	
