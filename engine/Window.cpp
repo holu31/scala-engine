@@ -59,7 +59,7 @@ Window::~Window()
     glfwTerminate();
 }
 
-void Window::runScene(Scene *scene)
+void Window::runScene(Node *scene)
 {
 
     double prevDeltaTime = (float) glfwGetTime();

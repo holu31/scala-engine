@@ -18,6 +18,7 @@ set(SOURCE_LIB
     engine/Node.cpp
     engine/physics/Physics.cpp
     engine/physics/PhysicsObject.cpp
+    engine/physics/shapes/PhysicsCube.cpp
     engine/render/Shaders.cpp
     engine/render/Mesh.cpp
     engine/render/Cube.cpp

@@ -11,20 +11,27 @@
 
 class PhysicsObject : public Node {
 
-    btCollisionShape* m_shape;
-    btMotionState* m_transform;
+protected:
+
+    PhysicsObject() {}
 
 public:
 
     float mass;
     glm::vec3 inertia;
     float restitution;
-    
+
     btRigidBody* rb;
 
     PhysicsObject(btCollisionShape *shape, btMotionState *transform, float mass,
         glm::vec3 inertia, float restitution = 0.25f);
     ~PhysicsObject();
+
+    void setOrigin(float x, float y, float z);
+    glm::vec3 getOrigin();
+
+    void setBasis(float x, float y, float z);
+    glm::vec3 getBasis();
 
     void draw() override;
 

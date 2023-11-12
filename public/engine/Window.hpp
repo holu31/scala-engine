@@ -5,7 +5,7 @@
 #include <GLFW/glfw3.h>
 
 #include <vector>
-#include <engine/Scene.hpp>
+#include <engine/Node.hpp>
 #include <engine/physics/Physics.hpp>
 
 class Window {
@@ -18,6 +18,6 @@ public:
     Window(int width, int height);
     ~Window();
 
-    void runScene(Scene *scene);
+    void runScene(Node *scene);
 
 };

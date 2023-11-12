@@ -2,12 +2,12 @@
 #include <engine/Camera.hpp>
 #include <engine/render/Cube.hpp>
 #include <engine/render/Texture.hpp>
-#include <engine/Scene.hpp>
-#include <engine/physics/PhysicsObject.hpp>
+#include <engine/Node.hpp>
+#include <engine/physics/shapes/PhysicsCube.hpp>
 
 #include <iostream>
 
-class TestScene : public Scene {
+class TestScene : public Node {
 public:
     TestScene() {
         
@@ -16,14 +16,7 @@ public:
         Texture *texture = new Texture("../assets/test.png");
         Cube *cube = new Cube();
 
-        btCollisionShape *boxShape = new btBoxShape(btVector3(cube->scale.x, cube->scale.y, cube->scale.z));
-        btDefaultMotionState *motionState = new btDefaultMotionState(btTransform(
-            btQuaternion(0, 0, 0, 1),
-            btVector3(0, 1.5, -3)
-        ));
-
-        PhysicsObject *phys_cube = new PhysicsObject(boxShape, motionState, 1.0f,
-            glm::vec3(1.0f), .25f);
+        PhysicsObject *phys_cube = new PhysicsCube();
 
         phys_cube->addChild(cube);
 
@@ -37,14 +30,8 @@ public:
         Cube *plane = new Cube();
         plane->scale = glm::vec3(10.0f, 0.5f, 10.0f);
 
-        btCollisionShape *planeShape = new btBoxShape(btVector3(plane->scale.x, plane->scale.y, plane->scale.z));
-        btDefaultMotionState *motionState2 = new btDefaultMotionState(btTransform(
-            btQuaternion(0, 0, 0, 1),
-            btVector3(0, -4, -3)
-        ));
-
-        PhysicsObject *phys_plane = new PhysicsObject(planeShape, motionState2, 0.0f,
-            glm::vec3(1.0f), .25f);
+        PhysicsObject *phys_plane = new PhysicsCube(plane->scale, 0.0f);
+        phys_plane->setOrigin(0, -4, -1.5);
 
         phys_plane->addChild(plane);
 

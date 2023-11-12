@@ -8,8 +8,6 @@ PhysicsObject::PhysicsObject(
         glm::vec3 inertia, float restitution)
 {
 
-    this->m_shape = shape;
-    this->m_transform = transform;
     this->mass = mass;
     this->inertia = inertia;
     this->restitution = restitution;
@@ -26,29 +24,33 @@ PhysicsObject::PhysicsObject(
 
 PhysicsObject::~PhysicsObject() {}
 
-void PhysicsObject::draw() {
-    Node::draw();
-
+void PhysicsObject::setOrigin(float x, float y, float z) {
     btTransform transform = rb->getWorldTransform();
+    transform.setIdentity();
 
-    btVector3 rbPosition = transform.getOrigin();
-    btMatrix3x3 rbRotation = transform.getBasis();
-    
-    rbPosition = btVector3(parent()->globalPos().x + rbPosition.getX(), parent()->globalPos().y + rbPosition.getY(), parent()->globalPos().z + rbPosition.getZ());
-    pos = glm::vec3(rbPosition.getX(), rbPosition.getY(), rbPosition.getZ());
+    transform.setOrigin(btVector3(x, y, z));
 
-    transform.setOrigin(rbPosition);
+    rb->setWorldTransform(transform);
+}
+
+glm::vec3 PhysicsObject::getOrigin() {
+    btVector3 origin = rb->getWorldTransform().getOrigin();
+
+    return glm::vec3(origin.getX(), origin.getY(), origin.getZ());
+}
+
+glm::vec3 PhysicsObject::getBasis() {
+    btMatrix3x3 basis = rb->getWorldTransform().getBasis();
 
     btScalar yaw, pitch, roll;
 
-    rbRotation.getEulerZYX(yaw, pitch, roll);
+    basis.getEulerZYX(yaw, pitch, roll);
 
-    rbRotation = btMatrix3x3(btQuaternion(parent()->globalRot().z + roll,
-                            parent()->globalRot().y + pitch,
-                            parent()->globalRot().x + yaw));
-    rot = glm::vec3(parent()->globalRot().x + yaw, parent()->globalRot().y + pitch, parent()->globalRot().z + roll);
+    return glm::vec3(roll, pitch, yaw);
+}
 
-    transform.setBasis(rbRotation);
-
-    m_transform->setWorldTransform(transform);
+void PhysicsObject::draw() {
+    Node::draw();
+    
+    pos = getOrigin();
 }
