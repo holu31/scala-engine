@@ -2,10 +2,29 @@ cmake_minimum_required(VERSION 3.10)
 project(scala-engine)
 
 set(CMAKE_CXX_STANDARD 20)
-add_compile_options(
-    -g
-    -Wall
-)
+
+if(CMAKE_BUILD_TYPE STREQUAL Debug)
+
+    add_compile_options(
+        -g
+        -Wall
+    )
+
+elseif(CMAKE_BUILD_TYPE STREQUAL Release)
+
+    add_compile_options(
+        -Oz
+        -fdata-sections
+        -ffunction-sections
+        -fipa-pta
+        -Wl,--gc-sections
+        -Wl,-O2
+        -Wl,--as-needed
+        -Wl,--strip-all
+        -Wall
+    )
+
+endif()
 
 
 include_directories("public/")
